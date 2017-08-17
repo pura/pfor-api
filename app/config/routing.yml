@@ -1,3 +1,21 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+app_contact_request:
+    path:     /api/v1/contact/request/{senderId}/{receiverId}
+    defaults: { _controller: AppBundle:Contact:request }
+    methods: [POST, GET]  #GET is easy test purpose temporarily
+
+app_contact_receive:
+    path:     /api/v1/contact/receive/{senderId}
+    defaults: { _controller: AppBundle:Contact:receive }
+    methods: [GET]
+
+app_message_send:
+    path:     /api/v1/message/send/{contactRef}
+    defaults: { _controller: AppBundle:Message:sendMessage }
+    methods: [POST, GET] #GET is easy test purpose temporarily
+
+app_message_read:
+    path:     /api/v1/message/read/{contactRef}
+    defaults: { _controller: AppBundle:Message:readMessage }
+    methods: [GET]
+
+
