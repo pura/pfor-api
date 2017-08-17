@@ -47,7 +47,7 @@ class ReadMessage
         /**
          * This is just for an example.. The message is read by queue or db or both or whatever the real mechanism is..
          */
-        $message = $this->storage->fetch('key.for.message.building.strategy' . $contactRef);
+        $message = $this->storage->fetch('key.for.message.building.strategy');
 
         $response->setHttpCode(Response::HTTP_OK)
             ->setSuccess(true)
