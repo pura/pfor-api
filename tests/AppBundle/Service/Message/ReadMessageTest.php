@@ -27,11 +27,11 @@ class ReadMessageTest extends TestCase
         $message->setMessage('Test Message');
 
         $this->storage->shouldReceive('fetch')
-            ->with('key.for.message.building.strategy-ref-of-current-connection')
+            ->with('key.for.message.building.strategy')
             ->once()
             ->andReturn($message);
 
-        $result = call_user_func($this->readMessage, '-ref-of-current-connection');
+        $result = call_user_func($this->readMessage, 'ref-of-current-connection');
         $this->assertInstanceOf(ApiResponse::class, $result);
         $this->assertTrue($result->getSuccess());
         $this->assertEquals(200, $result->getHttpCode());

@@ -23,6 +23,12 @@ Simple API that will allow two users to chat between them.
 * http://localhost:8087/app_dev.php/api/v1/message/send/{contactRef}
 
 
+
+**Running Tests**
+
+ `vendor/bin/phpunit tests/AppBundle/Service/`
+
+
 Future Improvement
 ===================
 * Use of RestApiBundle
