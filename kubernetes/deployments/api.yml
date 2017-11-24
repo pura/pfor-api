@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: api
+        track: stable
+    spec:
+      containers:
+        - name: nginx
+          image: "puraskar/nginx:1.0.1"
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/usr/sbin/nginx","-s","quit"]
+#          volumeMounts:
+#            - name: "../app/api"
+#              mountPath: "/var/www/html/api"
+#            - name: "../app/api/container/pushfor/nginx/centos7/site.conf"
+#              mountPath: "/etc/nginx/conf.d/default.conf"
+        - name: php-fpm
+          image: puraskar/php-fpm:1.0.1
+          ports:
+            - name: php-cgi
+              containerPort: 9000
+#          volumeMounts:
+#            - name: "../app/api"
+#              mountPath: "/var/www/html/api"
+#            - name: "../app/api/container/pushfor/php/php7/log.conf"
+#              mountPath: "/usr/local/etc/php-fpm.d/zz-log.conf"
+#            - name: "../app/api/container/pushfor/php/php7/php-fpm.conf"
+#              mountPath: "/etc/php-fpm.d/www.conf"

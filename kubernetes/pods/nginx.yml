@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  containers:
+    - name: nginx
+      image: puraskar/nginx:1.0.1
+      lifecycle:
+        preStop:
+          exec:
+            command: ["/usr/sbin/nginx","-s","quit"]
+      ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 443
+#      volumeMounts:
+#        - name: "api"
+#          mountPath: "/var/www/html/api"
+#        - name: "config"
+#          mountPath: "/etc/nginx/conf.d/default.conf"
+      resources:
+        limits:
+          cpu: 0.2
+          memory: "10Mi"
+#  volumes:
+#    - name: "api"
+#      path: "../../app/api"
+#    - name: "config"
+#      path: "../../app/api/container/pushfor/nginx/centos7/site.conf"
