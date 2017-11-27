@@ -4,15 +4,9 @@ metadata:
   name: "api"
 spec:
   selector:
-    app: "nginx"
-#    secure: "enabled"
+    app: "api"
   ports:
-#    - protocol: "TCP"
-#      port: 443
-#      targetPort: 443
-#      nodePort: 31000
     - protocol: "TCP"
-      port: 80
-#      targetPort: 8080
-#      nodePort: 31000
+      port: 9000
+      targetPort: 9000
   type: NodePort

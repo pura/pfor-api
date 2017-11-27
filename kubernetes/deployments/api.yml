@@ -7,18 +7,26 @@ spec:
   template:
     metadata:
       labels:
-        app: api
+        app: php-fpm
         track: stable
     spec:
       containers:
-        - name: hello
-          image: "puraskar/pfor-api"
-          ports:
-            - name: http
-              containerPort: 80
-            - name: health
-              containerPort: 81
-          resources:
-            limits:
-              cpu: 0.2
-              memory: "10Mi"
+        - name: php-fpm
+          image: puraskar/php-fpm:1.0.1
+          volumeMounts:
+            - name: "application"
+              mountPath: "/var/www/html/api"
+            - name: "log-config"
+              mountPath: "/usr/local/etc/php-fpm.d/zz-log.conf"
+            - name: "php-config"
+              mountPath: "/etc/php-fpm.d/www.conf"
+      volumes:
+        - name: application
+          hostPath:
+            path: "/home/puraskar/projects/pushfor/pfor-api/app/api"
+        - name: log-config
+          hostPath:
+            path: "/home/puraskar/projects/pushfor/pfor-api/app/api/container/pushfor/php/php7/log.conf"
+        - name: php-config
+          hostPath:
+            path: "/home/puraskar/projects/pushfor/pfor-api/app/api/container/pushfor/php/php7/php-fpm.conf"

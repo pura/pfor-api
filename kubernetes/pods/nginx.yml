@@ -17,17 +17,14 @@ spec:
           containerPort: 8080
         - name: https
           containerPort: 443
-#      volumeMounts:
-#        - name: "api"
-#          mountPath: "/var/www/html/api"
-#        - name: "config"
-#          mountPath: "/etc/nginx/conf.d/default.conf"
+      volumeMounts:
+        - name: "site-config"
+          mountPath: "/etc/nginx/conf.d/default.conf"
       resources:
         limits:
           cpu: 0.2
           memory: "10Mi"
-#  volumes:
-#    - name: "api"
-#      path: "../../app/api"
-#    - name: "config"
-#      path: "../../app/api/container/pushfor/nginx/centos7/site.conf"
+  volumes:
+    - name: site-config
+      hostPath:
+        path: "/home/puraskar/projects/pushfor/pfor-api/app/api/container/pushfor/nginx/centos7/site.conf"

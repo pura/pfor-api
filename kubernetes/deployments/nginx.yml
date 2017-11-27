@@ -17,8 +17,10 @@ spec:
             preStop:
               exec:
                 command: ["/usr/sbin/nginx","-s","quit"]
-#          volumeMounts:
-#            - name: "../app/api"
-#              mountPath: "/var/www/html/api"
-#            - name: "../app/api/container/pushfor/nginx/centos7/site.conf"
-#              mountPath: "/etc/nginx/conf.d/default.conf"
+          volumeMounts:
+            - name: "site-config"
+              mountPath: "/etc/nginx/conf.d/default.conf"
+      volumes:
+        - name: site-config
+          hostPath:
+            path: "/home/puraskar/projects/pushfor/pfor-api/app/api/container/pushfor/nginx/centos7/site.conf"
