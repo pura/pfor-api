@@ -11,26 +11,14 @@ spec:
         track: stable
     spec:
       containers:
-        - name: nginx
-          image: "puraskar/nginx:1.0.1"
-          lifecycle:
-            preStop:
-              exec:
-                command: ["/usr/sbin/nginx","-s","quit"]
-#          volumeMounts:
-#            - name: "../app/api"
-#              mountPath: "/var/www/html/api"
-#            - name: "../app/api/container/pushfor/nginx/centos7/site.conf"
-#              mountPath: "/etc/nginx/conf.d/default.conf"
-        - name: php-fpm
-          image: puraskar/php-fpm:1.0.1
+        - name: hello
+          image: "puraskar/pfor-api"
           ports:
-            - name: php-cgi
-              containerPort: 9000
-#          volumeMounts:
-#            - name: "../app/api"
-#              mountPath: "/var/www/html/api"
-#            - name: "../app/api/container/pushfor/php/php7/log.conf"
-#              mountPath: "/usr/local/etc/php-fpm.d/zz-log.conf"
-#            - name: "../app/api/container/pushfor/php/php7/php-fpm.conf"
-#              mountPath: "/etc/php-fpm.d/www.conf"
+            - name: http
+              containerPort: 80
+            - name: health
+              containerPort: 81
+          resources:
+            limits:
+              cpu: 0.2
+              memory: "10Mi"
